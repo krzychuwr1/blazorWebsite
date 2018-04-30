@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27604.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorWebsite.Server", "BlazorWebsite\BlazorWebsite.Server\BlazorWebsite.Server.csproj", "{56068F0E-50E0-43F4-A9FB-68E64A9B0940}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWebsite.Server", "BlazorWebsite\BlazorWebsite.Server\BlazorWebsite.Server.csproj", "{56068F0E-50E0-43F4-A9FB-68E64A9B0940}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorWebsite.Client", "BlazorWebsite\BlazorWebsite.Client\BlazorWebsite.Client.csproj", "{CB5D42DA-7EB8-4781-A477-AF62DA5395EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWebsite.Client", "BlazorWebsite\BlazorWebsite.Client\BlazorWebsite.Client.csproj", "{CB5D42DA-7EB8-4781-A477-AF62DA5395EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorWebsite.Shared", "BlazorWebsite\BlazorWebsite.Shared\BlazorWebsite.Shared.csproj", "{3521C85D-2626-4A76-85EE-311CD5CAA578}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWebsite.Shared", "BlazorWebsite\BlazorWebsite.Shared\BlazorWebsite.Shared.csproj", "{3521C85D-2626-4A76-85EE-311CD5CAA578}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

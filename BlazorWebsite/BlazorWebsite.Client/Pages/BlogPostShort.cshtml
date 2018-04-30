@@ -1,0 +1,11 @@
+﻿<h2>@Title</h2>
+<p><em>Published on @Date</em></p>
+<HtmlView Content="@Content" />
+<hr />
+<br />
+
+@functions{
+    public string Title { get; set; }
+    public string Content { get; set; }
+    public DateTime Date { get; set; }
+}

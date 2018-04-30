@@ -15,4 +15,32 @@
     <ProjectReference Include="..\BlazorWebsite.Shared\BlazorWebsite.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <BlazorGenerate Remove="Pages\Projects.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Pages\AboutMe.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Pages\BlogPostShort.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\BlogPostShort.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Pages\BlogPostShort.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Pages\HtmlView.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Pages\BlogPost.cshtml" />
+  </ItemGroup>
+
 </Project>

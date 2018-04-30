@@ -1,0 +1,11 @@
+﻿@*This component is a dirty workaround for blazor not supporting rendering raw html yet*@
+
+@using System.Web
+
+<span>
+    <img src="" onerror="(function (e) { e.parentElement.innerHTML = '@HttpUtility.JavaScriptStringEncode(Content)'; })(this)" />
+</span>
+
+@functions{
+    public string Content { get; set; }
+}
