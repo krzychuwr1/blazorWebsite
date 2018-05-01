@@ -1,16 +1,32 @@
-﻿@using BlazorWebsite.Shared
-@page "/blogpost/{Id}"
+﻿@page "/blogpost/{Id}"
+@using BlazorWebsite.Shared;
 @inject HttpClient Http
     <div class="jumbotron jumbotron-fluid">
         <h1 style="margin: 0 auto" class="mx-auto text-center">
-            About me
+            @BlogPostModel?.Title
         </h1>
     </div>
     <div class="col-md-6 offset-md-3 col-xs-12">
-        <h1>Hello!</h1>
-        <p>Here I am going to write about who I am and what I do.</p>
-    </div>  
+        @if(BlogPostModel != null)
+        {
+            <p><em>Published on @BlogPostModel.Date</em></p>
+            <HtmlView Content="@BlogPostModel.Content"></HtmlView>
+
+        }
+        else
+        {
+            <p><em>loading...</em></p>
+
+        }
+    </div> 
 
 @functions {
-    public int Id {get;set;}
+    public string Id {get;set;}
+
+    public BlogPostFull BlogPostModel { get; set; }
+
+    protected override async Task OnInitAsync()
+    {
+        BlogPostModel = await Http.GetJsonAsync<BlogPostFull>($"/api/BlogPost/{Id}");
+    }
 }

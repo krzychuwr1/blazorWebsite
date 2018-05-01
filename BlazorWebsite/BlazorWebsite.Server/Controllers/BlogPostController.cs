@@ -15,6 +15,7 @@ namespace BlazorWebsite.Server.Controllers
         {
             return Enumerable.Range(1, 5).Select(index => new BlogPostSummary
             {
+                Id = index,
                 Date = DateTime.Now.AddDays(index),
                 Content = 
 $@"<strong>Post content {index}</strong> <br/>
@@ -23,6 +24,18 @@ More content More content More content More content<br/>
 More content More content More content More content
 More content...",
                 Title = $"Post title {index}"
+            });
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetPost(int id)
+        {
+            return Ok(new BlogPostFull
+            {
+                Id = id,
+                Content = "mock content",
+                Date = DateTime.Now,
+                Title = "mock title"
             });
         }
     }

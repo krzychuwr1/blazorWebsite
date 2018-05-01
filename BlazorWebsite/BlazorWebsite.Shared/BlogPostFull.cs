@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BlazorWebsite.Shared
 {
-    public class BlogPostSummary
+    public class BlogPostFull
     {
         public int Id { get; set; }
         public DateTime Date { get; set; }
