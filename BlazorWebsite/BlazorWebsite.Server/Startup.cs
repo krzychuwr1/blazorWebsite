@@ -1,10 +1,12 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
+using BlazorWebsite.Server.Infrastructure.Database;
 using Microsoft.AspNetCore.Blazor.Server;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Serialization;
 using System.Linq;
@@ -22,7 +24,9 @@ namespace BlazorWebsite.Server
             {
                 options.SerializerSettings.ContractResolver = new DefaultContractResolver();
             });
+            var connection = Program.Configuration["connectionString"];
 
+            services.AddDbContext<BlogContext>(options => options.UseSqlServer(connection));
             services.AddResponseCompression(options =>
             {
                 options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[]

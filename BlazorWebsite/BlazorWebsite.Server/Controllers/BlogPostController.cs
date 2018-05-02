@@ -1,4 +1,5 @@
-﻿using BlazorWebsite.Shared;
+﻿using BlazorWebsite.Server.Infrastructure.Database;
+using BlazorWebsite.Shared;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,32 +11,35 @@ namespace BlazorWebsite.Server.Controllers
     [Route("api/[controller]")]
     public class BlogPostController : Controller
     {
+        private readonly BlogContext _db;
+
+        public BlogPostController(BlogContext db)
+        {
+            _db = db;
+        }
+
         [HttpGet("[action]")]
         public IEnumerable<BlogPostSummary> Summaries()
         {
-            return Enumerable.Range(1, 5).Select(index => new BlogPostSummary
+            return _db.Posts.Select(p => new BlogPostSummary
             {
-                Id = index,
-                Date = DateTime.Now.AddDays(index),
-                Content = 
-$@"<strong>Post content {index}</strong> <br/>
-More content More content More content More content
-More content More content More content More content<br/>
-More content More content More content More content
-More content...",
-                Title = $"Post title {index}"
+                Title = p.Title,
+                Id = p.Id,
+                Content = p.Content,
+                Date = p.Date
             });
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetPost(int id)
+        public async Task<IActionResult> GetPost(int id)
         {
+            var post = await _db.Posts.FindAsync(id);
             return Ok(new BlogPostFull
             {
-                Id = id,
-                Content = "mock content",
-                Date = DateTime.Now,
-                Title = "mock title"
+                Id = post.Id,
+                Content = post.Content,
+                Date = post.Date,
+                Title = post.Title
             });
         }
     }
