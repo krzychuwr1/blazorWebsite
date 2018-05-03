@@ -1,0 +1,18 @@
+﻿@using BlazorWebsite.Shared
+@using Microsoft.AspNetCore.Blazor.Browser.Interop
+@page "/addpost"
+
+<div class="jumbotron jumbotron-fluid">
+    <h1 style="margin: 0 auto" class="mx-auto text-center">
+        Add new post
+    </h1>
+</div>
+<button onclick=@CallJS>Call JavaScript</button>
+
+@functions {
+    private void CallJS()
+    {
+        Console.WriteLine("Test");
+        RegisteredFunction.Invoke<bool>("say", "Hello");
+    }
+}

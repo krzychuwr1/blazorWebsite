@@ -14,5 +14,17 @@
 
     <script src="css/bootstrap/bootstrap.bundle.min.js"></script>
     <script type="blazor-boot"></script>
+    <script>
+        // Register a very simple JavaScript function that just prints
+        // the input parameter to the browser's console
+        Blazor.registerFunction('say', (data) => {
+            console.dir(data);
+
+            // Your function currently has to return something. For demo
+            // purposes, we just return `true`.
+            return true;
+        });
+    </script>
+
 </body>
 </html>

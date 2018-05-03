@@ -46,4 +46,8 @@
     <BlazorGenerate Remove="Pages\BlogPost.cshtml" />
   </ItemGroup>
 
+  <ItemGroup>
+    <BlazorGenerate Remove="Pages\AddPost.cshtml" />
+  </ItemGroup>
+
 </Project>
