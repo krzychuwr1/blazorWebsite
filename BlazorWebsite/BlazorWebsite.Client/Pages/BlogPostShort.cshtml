@@ -8,8 +8,12 @@
 <br />
 
 @functions{
-    public int Id { get; set; }
-    public string Title { get; set; }
-    public string Content { get; set; }
-    public DateTime Date { get; set; }
+    [Parameter]
+    private int Id { get; set; }
+    [Parameter]
+    private string Title { get; set; }
+    [Parameter]
+    private string Content { get; set; }
+    [Parameter]
+    private DateTime Date { get; set; }
 }

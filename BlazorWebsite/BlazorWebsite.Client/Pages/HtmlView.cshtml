@@ -3,9 +3,12 @@
 @using System.Web
 
 <span>
-    <img src="" onerror="(function (e) { e.parentElement.innerHTML = '@HttpUtility.JavaScriptStringEncode(Content)'; })(this)" />
+    <img src="" onerror=@Js />
 </span>
 
 @functions{
-    public string Content { get; set; }
+    [Parameter]
+    private string Content { get; set; }
+
+    private string Js => "(function (e) { e.parentElement.innerHTML = '" + @HttpUtility.JavaScriptStringEncode(Content) + "'; })(this)";
 }
