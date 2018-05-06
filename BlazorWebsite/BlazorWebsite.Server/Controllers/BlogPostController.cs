@@ -1,5 +1,6 @@
 ﻿using BlazorWebsite.Server.Infrastructure.Database;
 using BlazorWebsite.Shared;
+using BlazorWebsite.Shared.Post;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -41,6 +42,24 @@ namespace BlazorWebsite.Server.Controllers
                 Date = post.Date,
                 Title = post.Title
             });
+        }
+
+        [HttpPost("[action]")]
+        public async Task<IActionResult> AddPost([FromBody]AddPostRequest post)
+        {
+            if((Request.Headers.TryGetValue("authentication-token", out var token)))
+            {
+                var userId = Guid.Parse(token.First());
+                if (await _db.Users.FindAsync(userId) != null)
+                    _db.Posts.Add(new Model.BlogPost
+                    {
+                        Title = post.Title,
+                        Content = post.Content,
+                        Date = DateTime.Now
+                    });
+                    await _db.SaveChangesAsync();
+            }
+            return Ok();
         }
     }
 }

@@ -16,5 +16,7 @@ namespace BlazorWebsite.Server.Infrastructure.Database
         }
 
         public DbSet<BlogPost> Posts { get; set; }
+
+        public DbSet<User> Users { get; set; }
     }
 }

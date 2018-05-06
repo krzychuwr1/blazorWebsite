@@ -50,4 +50,16 @@
     <BlazorGenerate Remove="Pages\AddPost.cshtml" />
   </ItemGroup>
 
+  <ItemGroup>
+    <BlazorGenerate Remove="Wrappers\SummerNoteComponent.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Pages\Login.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Pages\www.cshtml" />
+  </ItemGroup>
+
 </Project>

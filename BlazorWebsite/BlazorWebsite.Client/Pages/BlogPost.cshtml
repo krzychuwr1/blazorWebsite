@@ -21,7 +21,8 @@
     </div> 
 
 @functions {
-    public string Id {get;set;}
+    [Parameter]
+    private string Id {get;set;}
 
     private BlogPostFull BlogPostModel { get; set; }
 

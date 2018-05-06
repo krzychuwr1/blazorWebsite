@@ -1,5 +1,11 @@
-﻿@using BlazorWebsite.Shared
+﻿@using BlazorWebsite.Shared.Post
 @using Microsoft.AspNetCore.Blazor.Browser.Interop
+@using BlazorWebsite.Client.Wrappers;
+@using BlazorWebsite.Client.Infrastructure;
+@inject Microsoft.AspNetCore.Blazor.Services.IUriHelper UriHelper
+
+@inject ISessionManager SessionManager
+@inject HttpClient Http;
 @page "/addpost"
 
 <div class="jumbotron jumbotron-fluid">
@@ -7,12 +13,26 @@
         Add new post
     </h1>
 </div>
-<button onclick=@CallJS>Call JavaScript</button>
+<input bind=@title class="form-control" placeholder="title" />
+<SummerNoteComponent ref="summerNote" id="test" />
+<button onclick=@addPost>add post</button>
+@functions{
+    private string title;
+    private SummerNoteComponent summerNote;
 
-@functions {
-    private void CallJS()
+    protected override void OnInit()
     {
-        Console.WriteLine("Test");
-        RegisteredFunction.Invoke<bool>("say", "Hello");
+        if (string.IsNullOrWhiteSpace(SessionManager.GetValue("authentication-token")))
+        {
+            UriHelper.NavigateTo("/login");
+        }
+    }
+
+    private async Task addPost()
+    {
+        var content = summerNote.GetHtmlContent();
+        var token = SessionManager.GetValue("authentication-token");
+        Http.DefaultRequestHeaders.TryAddWithoutValidation("authentication-token", token);
+        await Http.PostJsonAsync("/api/blogpost/addpost", new AddPostRequest { Title = title, Content = content });
     }
 }

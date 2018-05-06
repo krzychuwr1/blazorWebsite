@@ -1,0 +1,70 @@
+﻿@using BlazorWebsite.Client.Infrastructure;
+
+@page "/login"
+@inject HttpClient Http
+@inject Microsoft.AspNetCore.Blazor.Services.IUriHelper UriHelper
+@inject ISessionManager SessionManager
+
+@using BlazorWebsite.Shared.Authentication
+
+<div class="jumbotron jumbotron-fluid">
+    <h1 style="margin: 0 auto" class="mx-auto text-center">
+        Login
+    </h1>
+</div>
+
+<div class="col-md-2 offset-md-5 col-sm-10 offset-sm-1">
+    @if (loggingIn)
+    {
+        <div class="alert alert-info">
+            logging in...
+        </div>
+    }
+    @if (loggedIn)
+    {
+        <div class="alert alert-success">
+            <strong>Success!</strong>
+        </div>
+    }
+    @if (errorVisible)
+    {
+        <div class="alert alert-danger">
+            <strong>Error!</strong> Wrong login or password.
+        </div>
+    }
+
+    <input class="form-control" bind=@username placeholder="username" />
+    <input class="form-control" bind=@password type="password" placeholder="password" />
+    <button class="btn btn-success col-md-6 offset-md-3 " onclick=@loginAction style="margin-top: 5px">Log in</button>
+</div>
+
+
+@functions {
+    private bool loggingIn = false;
+    private bool loggedIn = false;
+    private bool errorVisible = false;
+
+    private string username;
+
+    private string password;
+
+    private async Task loginAction()
+    {
+        loggedIn = false;
+        errorVisible = false;
+        loggingIn = true;
+        var response = await Http.PostJsonAsync<LoginResponse>("/api/Authentication/Login", new LoginRequest { Password = password, Username = username });
+        if(response.IsSuccess)
+        {
+            loggingIn = false;
+            loggedIn = true;
+            SessionManager.SetValue("authentication-token", response.AuthToken.ToString());
+            UriHelper.NavigateTo("/addpost");
+        }
+        else
+        {
+            loggingIn = false;
+            errorVisible = true;
+        }
+    }
+}

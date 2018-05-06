@@ -1,0 +1,10 @@
+﻿@using BlazorWebsite.Shared
+@inject Microsoft.AspNetCore.Blazor.Services.IUriHelper UriHelper
+@page "/www"
+
+@functions {
+    protected override void OnInit()
+    {
+        UriHelper.NavigateTo("/");
+    }
+}
