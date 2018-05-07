@@ -18,10 +18,10 @@
 
     protected override void OnAfterRender()
     {
-        InitializeSummernote(id);
+        InitializeSummernote();
     }
 
-    void InitializeSummernote(string id)
+    void InitializeSummernote()
     {
         RegisteredFunction.Invoke<bool>("blazor_summernote", id);
         initialized = true;
@@ -32,6 +32,8 @@
         code = GetHtmlContent();
         codeChanged(code);
     }
+
+    public void Destroy() => RegisteredFunction.Invoke<bool>("blazor_summernoteDestroy", id);
 
     public string GetHtmlContent()
     {

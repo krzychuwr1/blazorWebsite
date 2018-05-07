@@ -16,6 +16,11 @@ Blazor.registerFunction('blazor_summernoteCode', (id) => {
     }
 });
 
+Blazor.registerFunction('blazor_summernoteDestroy', (id) => {
+    $('#' + id).summernote('destroy');
+    return true;
+});
+
 Blazor.registerFunction('blazor_localStorageGetValue', (key) => {
     return localStorage.getItem(key);
 });

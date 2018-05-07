@@ -13,9 +13,11 @@
         Add new post
     </h1>
 </div>
-<input bind=@title class="form-control" placeholder="title" />
-<SummerNoteComponent ref="summerNote" id="test" />
-<button onclick=@addPost>add post</button>
+<div class="col-md-10 offset-md-1">
+    <input bind=@title class="form-control" placeholder="title" />
+    <SummerNoteComponent ref="summerNote" id="test" />
+    <button class="btn btn-success mr-auto" onclick=@addPost>add post</button>
+</div>
 @functions{
     private string title;
     private SummerNoteComponent summerNote;
@@ -31,8 +33,10 @@
     private async Task addPost()
     {
         var content = summerNote.GetHtmlContent();
+        summerNote.Destroy();
         var token = SessionManager.GetValue("authentication-token");
         Http.DefaultRequestHeaders.TryAddWithoutValidation("authentication-token", token);
         await Http.PostJsonAsync("/api/blogpost/addpost", new AddPostRequest { Title = title, Content = content });
+        UriHelper.NavigateTo("/");
     }
 }
